@@ -1,9 +1,9 @@
-import { useId } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import {useId} from "react";
+import {Controller, useFormContext} from "react-hook-form";
 
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { cn } from "#/lib/utils";
+import {Label} from "@/components/ui/label";
+import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
+import {cn} from "#/lib/utils";
 import {Asterisk} from "lucide-react";
 
 export interface CardChoice {
@@ -20,19 +20,20 @@ export interface CardChoice {
 }
 
 export default function CardChoiceView({
-                                   name,
-                                   label,
-                                   options,
-                                   description,required=false
-                               }: CardChoice) {
+                                           name,
+                                           label,
+                                           options,
+                                           description, required = false
+                                       }: CardChoice) {
     const id = useId();
-    const { control } = useFormContext();
+    const {control} = useFormContext();
 
     return (
         <div>
             <div className="mb-3">
                 <Label htmlFor={id} className="block text-sm font-semibold">
-                    {label} {required && <Asterisk className="inline-flex text-destructive/50 size-3.5 -ml-1 -mt-1.5" aria-label="required" />}
+                    {label} {required && <Asterisk className="inline-flex text-destructive/50 size-3.5 -ml-1 -mt-1.5"
+                                                   aria-label="required"/>}
                 </Label>
 
                 {description && (
@@ -42,7 +43,7 @@ export default function CardChoiceView({
             <Controller
                 control={control}
                 name={name}
-                render={({ field }) => (
+                render={({field}) => (
                     <RadioGroup
                         aria-labelledby={id}
                         value={field.value}

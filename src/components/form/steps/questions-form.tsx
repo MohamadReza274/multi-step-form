@@ -1,7 +1,7 @@
-import { Button } from "#/components/ui/button";
-import { Checkbox } from "#/components/ui/checkbox";
-import { Input } from "#/components/ui/input";
-import { Label } from "#/components/ui/label";
+import {Button} from "#/components/ui/button";
+import {Checkbox} from "#/components/ui/checkbox";
+import {Input} from "#/components/ui/input";
+import {Label} from "#/components/ui/label";
 import {
     Select,
     SelectContent,
@@ -15,7 +15,7 @@ import {
     useFormContext,
     type Control,
 } from "react-hook-form";
-import { XIcon } from "lucide-react";
+import {XIcon} from "lucide-react";
 
 const renderOptionsInput = (type: any): boolean => {
     switch (type) {
@@ -54,9 +54,9 @@ const QuestionsForm = ({
         return null;
     }
 
-    const { register, watch } = context || {};
+    const {register, watch} = context || {};
 
-    const { fields, append, remove } = useFieldArray({
+    const {fields, append, remove} = useFieldArray({
         control,
         name: "questions",
     });
@@ -77,13 +77,13 @@ const QuestionsForm = ({
                         <Controller
                             name={`questions.${index}.type`}
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Select
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
                                 >
                                     <SelectTrigger className="w-full">
-                                        <SelectValue placeholder="Select question type" />
+                                        <SelectValue placeholder="Select question type"/>
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="TEXT">Short Answer</SelectItem>
@@ -104,14 +104,14 @@ const QuestionsForm = ({
                             //   name={`questions.${index}.options`}
                             //   control={control}
                             // />
-                            <QuestionOptions index={index} />
+                            <QuestionOptions index={index}/>
                         )}
 
                         <div className="flex justify-between">
                             <Controller
                                 name={`questions.${index}.required`}
                                 control={control}
-                                render={({ field }) => (
+                                render={({field}) => (
                                     <div className="flex items-center space-x-2">
                                         <Checkbox
                                             id={`required-${index}`}
@@ -159,9 +159,10 @@ export default QuestionsForm;
 interface Props {
     index: number;
 }
-function QuestionOptions({ index }: Props) {
-    const { control, register } = useFormContext();
-    const { fields, append, remove } = useFieldArray({
+
+function QuestionOptions({index}: Props) {
+    const {control, register} = useFormContext();
+    const {fields, append, remove} = useFieldArray({
         control,
         name: `questions.${index}.options`,
     });
@@ -180,14 +181,14 @@ function QuestionOptions({ index }: Props) {
                         variant="destructive"
                         onClick={() => remove(optIndex)}
                     >
-                        <XIcon />
+                        <XIcon/>
                     </Button>
                 </div>
             ))}
             <Button
                 type="button"
                 variant="secondary"
-                onClick={() => append("", { shouldFocus: true })}
+                onClick={() => append("", {shouldFocus: true})}
             >
                 + Add Option
             </Button>

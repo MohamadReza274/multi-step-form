@@ -1,4 +1,4 @@
-import { useFormContext, useWatch } from "react-hook-form";
+import {useFormContext, useWatch} from "react-hook-form";
 
 import {
     FormField,
@@ -7,7 +7,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 
-import { Checkbox } from "@/components/ui/checkbox";
+import {Checkbox} from "@/components/ui/checkbox";
 
 import {
     Select,
@@ -18,10 +18,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { FormInput } from "#/components/form/components";
+import {FormInput} from "#/components/form/components";
 
 const SalaryRangeForm = () => {
-    const { control, setValue } = useFormContext();
+    const {control, setValue} = useFormContext();
 
     const preferNotToSpecify = useWatch({
         control,
@@ -42,7 +42,7 @@ const SalaryRangeForm = () => {
             <FormField
                 control={control}
                 name="salaryNotSpecified"
-                render={({ field }) => (
+                render={({field}) => (
                     <FormItem className="flex flex-row items-center gap-2 space-y-0">
                         <Checkbox
                             id="no-salary"
@@ -91,13 +91,13 @@ const SalaryRangeForm = () => {
                 <FormField
                     control={control}
                     name="currency"
-                    render={({ field }) => (
+                    render={({field}) => (
                         <FormItem className="max-w-xs">
                             <FormLabel>Currency</FormLabel>
 
                             <Select onValueChange={field.onChange} value={field.value}>
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Select currency" />
+                                    <SelectValue placeholder="Select currency"/>
                                 </SelectTrigger>
 
                                 <SelectContent>
@@ -110,7 +110,7 @@ const SalaryRangeForm = () => {
                                 </SelectContent>
                             </Select>
 
-                            <FormMessage />
+                            <FormMessage/>
                         </FormItem>
                     )}
                 />

@@ -90,7 +90,7 @@ export const flow: Flow<Schema> = [
                         categoryId: ["", []],
                         description: ["", []],
                     }),
-                    render: ({fields, values, params, onNext, onJump}) => ({
+                    render: ({fields, values, onNext, onJump}) => ({
                         step: {
                             type: "form",
                             step: {
@@ -102,31 +102,29 @@ export const flow: Flow<Schema> = [
                             edit: values.edit,
                         },
                         form: (
-                            <Form
-
-                                defaultValues={
-                                    fields
-                                }
-                                resolver={zodResolver(
-                                    z.object({
-                                        title: z.string().min(3, "Title is required"),
-                                        description: z.string({error:"Description is required"}).min(30,"Description must be at least 30 characters"),
-                                        categoryId: z.string(),
-                                    }),
-                                )}
-                                eyebrow="Step 1 of 6"
-                                heading="Start with the job basics"
-                                message="Provide a clear title, category, and description so candidates understand the role."
-                                buttons={{
-                                    back: null,
-                                    next: "Continue",
-                                    edit: "Save & review",
-                                }}
-                                edit={values.edit}
-                                onNext={onNext}
-                                onJump={onJump}
-                                status={params.status}
-                                prevId={null}
+                            <Form key="basic-info"
+                                  defaultValues={
+                                      fields
+                                  }
+                                  resolver={zodResolver(
+                                      z.object({
+                                          title: z.string().min(3, "Title is required"),
+                                          description: z.string({error: "Description is required"}).min(30, "Description must be at least 30 characters"),
+                                          categoryId: z.string(),
+                                      }),
+                                  )}
+                                  eyebrow="Step 1 of 6"
+                                  heading="Start with the job basics"
+                                  message="Provide a clear title, category, and description so candidates understand the role."
+                                  buttons={{
+                                      back: null,
+                                      next: "Continue",
+                                      edit: "Save & review",
+                                  }}
+                                  edit={values.edit}
+                                  onNext={onNext}
+                                  onJump={onJump}
+                                  prevId={null}
                             >
                                 <BasicInfo/>
                             </Form>
@@ -149,7 +147,7 @@ export const flow: Flow<Schema> = [
                         numberOfJobs: [1, []],
                         vacancyNumber: ["", []],
                     }),
-                    render: ({fields, values, params, onNext, onJump}) => ({
+                    render: ({fields, values, onNext, onJump}) => ({
                         step: {
                             type: "form",
                             step: {
@@ -161,47 +159,45 @@ export const flow: Flow<Schema> = [
                             edit: values.edit,
                         },
                         form: (
-                            <Form
-
-                                defaultValues={
-                                    fields
-                                }
-                                resolver={
-                                    zodResolver(
-                                        z.object({
-                                            employmentType: z.any().default("FULL_TIME"),
-                                            workMode: z.any(),
-                                            locations: z
-                                                .array(z.string())
-                                                .default([])
-                                                .refine((val) => val.length > 0, {
-                                                    message: "Please select at least one location",
-                                                }),
-                                            contractDuration: z.string().optional(),
-                                            numberOfJobs: z.coerce
-                                                .number({error: "Please enter a valid number"})
-                                                .int()
-                                                .positive("Value must be greater than zero")
-                                                .default(1),
-                                            vacancyNumber: z
-                                                .string()
-                                                .min(1, "Vacancy number is required"),
-                                        }),
-                                    ) as any
-                                }
-                                eyebrow="Step 2 of 6"
-                                heading="Define the job structure"
-                                message="Set employment type, work mode, locations, and number of openings."
-                                buttons={{
-                                    back: "Back",
-                                    next: "Continue",
-                                    edit: "Save & review",
-                                }}
-                                onNext={onNext}
-                                onJump={onJump}
-                                status={params.status}
-                                prevId={"basicInfo"}
-                                edit={values.edit}
+                            <Form key="additional-details"
+                                  defaultValues={
+                                      fields
+                                  }
+                                  resolver={
+                                      zodResolver(
+                                          z.object({
+                                              employmentType: z.any().default("FULL_TIME"),
+                                              workMode: z.any(),
+                                              locations: z
+                                                  .array(z.string())
+                                                  .default([])
+                                                  .refine((val) => val.length > 0, {
+                                                      message: "Please select at least one location",
+                                                  }),
+                                              contractDuration: z.string().optional(),
+                                              numberOfJobs: z.coerce
+                                                  .number({error: "Please enter a valid number"})
+                                                  .int()
+                                                  .positive("Value must be greater than zero")
+                                                  .default(1),
+                                              vacancyNumber: z
+                                                  .string()
+                                                  .min(1, "Vacancy number is required"),
+                                          }),
+                                      ) as any
+                                  }
+                                  eyebrow="Step 2 of 6"
+                                  heading="Define the job structure"
+                                  message="Set employment type, work mode, locations, and number of openings."
+                                  buttons={{
+                                      back: "Back",
+                                      next: "Continue",
+                                      edit: "Save & review",
+                                  }}
+                                  onNext={onNext}
+                                  onJump={onJump}
+                                  prevId={"basicInfo"}
+                                  edit={values.edit}
 
                             >
                                 <JobDetailsForm/>
@@ -214,7 +210,7 @@ export const flow: Flow<Schema> = [
     },
     {
         jump: {
-            id: "candidateRequirements",
+            id: "candidateRequiments",
             at: {
                 form: {
                     fields: () => ({
@@ -224,7 +220,7 @@ export const flow: Flow<Schema> = [
                         requirements: ["", []],
                         jobLevel: ["ENTRY", []],
                     }),
-                    render: ({fields, values, params, onNext, onJump}) => ({
+                    render: ({fields, values, onNext, onJump}) => ({
                         step: {
                             type: "form",
                             step: {
@@ -238,7 +234,7 @@ export const flow: Flow<Schema> = [
                         form: (
                             // Candidate Requirements
                             <Form
-
+                                key="candidate-requirements"
                                 defaultValues={
                                     fields
                                 }
@@ -248,7 +244,7 @@ export const flow: Flow<Schema> = [
                                             educationLevel: z.any().optional(),
                                             gender: z.any().default("MALE_FEMALE").optional(),
                                             minExperience: z.number().positive().default(1),
-                                            requirements: z.string({error:"please specify the job requirement"}).min(30,{error:"Requirement must be at least 30 characters"}),
+                                            requirements: z.string({error: "please specify the job requirement"}).min(30, {error: "Requirement must be at least 30 characters"}),
                                             jobLevel: z.any().default("ENTRY"),
                                         }),
                                     ) as any
@@ -263,7 +259,6 @@ export const flow: Flow<Schema> = [
                                 }}
                                 onNext={onNext}
                                 onJump={onJump}
-                                status={params.status}
                                 edit={values.edit}
                                 prevId="additionalInfo"
 
@@ -291,7 +286,7 @@ export const flow: Flow<Schema> = [
                         applicationEmail: [undefined, []],
                         externalApplyUrl: [undefined, []],
                     }),
-                    render: ({fields, values, params, onNext, onJump}) => ({
+                    render: ({fields, values, onNext, onJump}) => ({
                         step: {
                             type: "form",
                             step: {
@@ -305,7 +300,7 @@ export const flow: Flow<Schema> = [
                         form: (
                             // Salary & Application
                             <Form
-
+                                key="salary-application"
                                 defaultValues={
                                     fields
                                 }
@@ -317,7 +312,7 @@ export const flow: Flow<Schema> = [
                                             salaryMax: z.number().positive().optional(),
                                             salaryMin: z.number().positive().optional(),
                                             salaryNotSpecified: z.boolean().optional(),
-                                            submissionGuidelines: z.string({error: "Please tell applicants how to submit their application."}).min(30,{error:"Guidelines must be at least 30 characters"}),
+                                            submissionGuidelines: z.string({error: "Please tell applicants how to submit their application."}).min(30, {error: "Guidelines must be at least 30 characters"}),
                                             applicationEmail: z.email().optional(),
                                             externalApplyUrl: z.url().optional(),
                                         }),
@@ -334,7 +329,6 @@ export const flow: Flow<Schema> = [
                                 onNext={onNext}
                                 prevId="candidateRequiments"
                                 onJump={onJump}
-                                status={params.status}
                                 edit={values.edit}
 
                             >
@@ -359,7 +353,7 @@ export const flow: Flow<Schema> = [
                                 fields: () => ({
                                     questions: [[], []],
                                 }),
-                                render: ({fields, values, params, onNext, onJump}) => ({
+                                render: ({fields, values, onNext, onJump}) => ({
                                     step: {
                                         type: "form",
                                         step: {
@@ -371,9 +365,9 @@ export const flow: Flow<Schema> = [
                                         edit: values.edit,
                                     },
                                     form: (
-                                        // Salary & Application
+                                        // Questions
                                         <Form
-
+                                            key="questions"
                                             defaultValues={
                                                 fields
                                             }
@@ -402,7 +396,6 @@ export const flow: Flow<Schema> = [
                                                 edit: "Save & review",
                                             }}
                                             onNext={onNext}
-                                            status={params.status}
                                             prevId="salaryApplication"
                                             edit={values.edit}
                                             onJump={onJump}
@@ -430,7 +423,7 @@ export const flow: Flow<Schema> = [
                         status: ["PUBLISHED", []],
                         publishedAt: [null, []],
                     }),
-                    render: ({values, fields, params, onNext, onJump}) => ({
+                    render: ({values, fields, onNext, onJump}) => ({
                         step: {
                             type: "form",
                             step: {
@@ -469,7 +462,6 @@ export const flow: Flow<Schema> = [
                                 onJump={onJump}
                                 edit={values.edit}
                                 prevId="questions"
-                                status={params.status}
 
                             >
                                 <PublishingForm/>
@@ -582,21 +574,21 @@ export const flow: Flow<Schema> = [
                                         rows: [
                                             {
                                                 label: "Salary",
-                                                value: values.salaryNotSpecified
+                                                value: values?.salaryNotSpecified
                                                     ? "Not specified"
                                                     : format.salary(
-                                                        values.salaryMin,
-                                                        values.salaryMax,
-                                                        values.currency,
+                                                        values?.salaryMin,
+                                                        values?.salaryMax,
+                                                        values?.currency,
                                                     ),
                                             },
                                             {
                                                 label: "Apply mode",
-                                                value: format.text(values.applyMode),
+                                                value: format.text(values?.applyMode),
                                             },
                                             {
                                                 label: "Application email",
-                                                value: format.text(values.applicationEmail),
+                                                value: format.text(values?.applicationEmail),
                                             },
                                             {
                                                 label: "External apply URL",
@@ -604,22 +596,29 @@ export const flow: Flow<Schema> = [
                                             },
                                             {
                                                 label: "Submission guidelines",
-                                                value: format.text(values.submissionGuidelines)
+                                                value: format.text(values?.submissionGuidelines)
                                             },
                                         ],
                                     },
-                                    {
-                                        text: "Application questions",
-                                        edit: "questions",
-                                        rows: [
+
+                                    // ✅ conditionally add this section
+                                    ...(values?.questions?.length >= 1
+                                        ? [
                                             {
-                                                label: "Questions",
-                                                value: `${values?.questions?.length} custom question${
-                                                    values?.questions?.length === 1 ? "" : "s"
-                                                }`,
+                                                text: "Application questions",
+                                                edit: "questions",
+                                                rows: [
+                                                    {
+                                                        label: "Questions",
+                                                        value: `${values?.questions.length} custom question${
+                                                            Number(values?.questions?.length) === 1 ? "" : "s"
+                                                        }`,
+                                                    },
+                                                ],
                                             },
-                                        ],
-                                    },
+                                        ]
+                                        : []),
+
                                     {
                                         text: "Publishing",
                                         edit: "publishInfo",

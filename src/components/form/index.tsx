@@ -6,7 +6,6 @@ import {ArrowLeftIcon, ArrowRightIcon} from "lucide-react";
 
 import {Button} from "@/components/ui/button";
 import {type ReactNode} from "react";
-import type {FormStatus} from "#/components/form/types.ts";
 
 interface FormProps<T extends FieldValues> {
     defaultValues: DefaultValues<T>;
@@ -23,8 +22,6 @@ interface FormProps<T extends FieldValues> {
     prevId: string | null;
     edit: boolean;
     children: ReactNode;
-    status: FormStatus;
-
     eyebrow: string | null;
 }
 
@@ -34,21 +31,22 @@ export function Form<T extends FieldValues>({
                                                 heading,
                                                 message,
                                                 children,
-                                                status, eyebrow,
+                                                eyebrow,
                                                 buttons,
                                                 onNext,
                                                 onJump,
                                                 prevId,
                                                 edit,
                                             }: FormProps<T>) {
-    const form = useForm({defaultValues, resolver, mode: "onChange"});
-    return <div
 
+
+    const form = useForm({defaultValues:defaultValues, resolver, mode: "onChange"});
+    return <div
         className="h-full"
     >
         <form
             noValidate
-            autoComplete="off"
+            // autoComplete="off"
             onSubmit={form.handleSubmit((fields) => {
                 if (edit) onJump("review", fields);
                 else onNext(fields);
@@ -85,7 +83,7 @@ export function Form<T extends FieldValues>({
                         )}
                         <Button
                             type="submit"
-                            disabled={!form.formState.isValid || status.submitting}
+                            disabled={!form.formState.isValid || form.formState.isSubmitting}
                             className="ml-auto"
                         >
                             {edit ? buttons.edit : buttons.next}

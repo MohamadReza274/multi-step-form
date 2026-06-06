@@ -1,9 +1,9 @@
-import type { OnNext, OnJump } from "@formity/react";
+import type {OnNext, OnJump} from "@formity/react";
 
-import { ArrowRightIcon, PencilIcon } from "lucide-react";
+import {ArrowRightIcon, PencilIcon} from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import type { FormStatus } from "../types.ts";
+import {Button} from "@/components/ui/button";
+import type {FormStatus} from "../types.ts";
 
 interface ReviewProps {
     heading: string;
@@ -51,7 +51,7 @@ export function Review({
                         onClick={() => onNext({})}
                     >
                         {status.submitting ? "Submitting..." : button}
-                        <ArrowRightIcon className="size-3.5" />
+                        <ArrowRightIcon className="size-3.5"/>
                     </Button>
                 </div>
             </footer>
@@ -70,7 +70,7 @@ interface ItemViewProps {
     onEdit: (edit: string) => void;
 }
 
-function ItemView({ item, onEdit }: ItemViewProps) {
+function ItemView({item, onEdit}: ItemViewProps) {
 
     return (
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
@@ -83,7 +83,7 @@ function ItemView({ item, onEdit }: ItemViewProps) {
                     onClick={() => onEdit(item.edit)}
                     className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold text-gray-500 transition-colors outline-none hover:bg-gray-100 hover:text-gray-700 focus-visible:ring-2 focus-visible:ring-gray-400/50"
                 >
-                    <PencilIcon className="size-3" />
+                    <PencilIcon className="size-3"/>
                     Edit
                 </button>
             </div>
